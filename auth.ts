@@ -8,7 +8,7 @@ import { sql } from "@vercel/postgres";
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
-    const user = await sql<User>`SELECT * from USERS where email = ${email}`;
+    const user = await sql<User>`SELECT * from USERS where email=${email}`;
     return user.rows[0];
   } catch (error) {
     console.error("Failed to fetch user", error);
@@ -31,8 +31,8 @@ export const { auth, signIn, signOut } = NextAuth({
           const user = await getUser(email);
           if (!user) return null;
 
-          const passwordMatch = await bycrypt.compare(password, user.password);
-          if (passwordMatch) return user;
+          const passwordsMatch = await bycrypt.compare(password, user.password);
+          if (passwordsMatch) return user;
         }
 
         console.log("Invalid credentials");
