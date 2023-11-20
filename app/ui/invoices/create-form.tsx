@@ -90,7 +90,6 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
               </div>
             ) : null}
           </div>
-          s
         </div>
 
         {/* Invoice Status */}
